@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="data.mapper.TestMapper">
+	<insert id="testInsert" parameterType="TestDto">
+		insert into reacttest1 (irum,message,writeday) values (#{irum},#{message},now())
+	</insert>
+	<select id="getAllDatas" resultType="TestDto">
+		select * from reacttest1 order by num
+	</select>
+	<delete id="testDelete">
+		delete from reacttest1 where num=#{num}
+	</delete>
+</mapper>

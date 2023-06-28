@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style="margin: 30px 30px;">
+        <h3>width 속성 변경하기 예제</h3>
+        <img src="../image/moviestar/1.jpg" id="photo1" width="200">
+        <br><br>
+        <button type="button" id="btn1">점점작게</button>
+        <button type="button" id="btn2">점점크게</button>
+    </div>
+    <script>
+        var photo1=document.getElementById("photo1");
+        //버튼 이벤트
+        document.getElementById("btn1").onclick=function(){
+            var w=photo1.getAttribute("width");
+            //사진의
+            photo1.setAttribute("width",w-10)
+        }
+
+        document.getElementById("btn2").onclick=function(){
+            var w=photo1.getAttribute("width");
+            // photo1.setAttribute("width",Number(w)+10);
+            photo1.setAttribute("width",eval(w+"+"+10));
+            
+        }
+
+    </script>
+    <hr>
+    <div style="margin: 30px 30px;">
+        <h3>width 속성 변경하기 예제</h3>
+        <img src="../image/moviestar/3.jpg" id="photo2" style="width:200px">
+        <br><br>
+        <button type="button" id="btn3">점점작게</button>
+        <button type="button" id="btn4">점점크게</button>
+    </div>
+
+    <script>
+        var photo2=document.getElementById("photo2");
+
+        document.getElementById("btn3").onclick=function() {
+            //현재 style의 width 값을 얻어서 확인해보기
+            //var w=photo2.style.width;
+            //console.log(w,typeof(w)); //200px string
+            
+            var w=parseInt(photo2.style.width,10); //10진수 숫자만 변환(10생략)
+            console.log(w,typeof(w)); //200 number
+
+            //변경
+            photo2.style.width=(w-10)+"px"
+        }
+
+        document.getElementById("btn4").onclick=function() {
+            //현재 style의 width 값을 얻어서 확인해보기
+            //var w=photo2.style.width;
+            //console.log(w,typeof(w)); //200px string
+            
+            var w=parseInt(photo2.style.width,10); //10진수 숫자만 변환(10생략)
+            console.log(w,typeof(w)); //200 number
+
+            //변경
+            photo2.style.width=(w+10)+"px"
+        }
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--부트스트랩 5-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!--jquery-->
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+
+    <title>Document</title>
+
+    <style>
+        .small{
+            width: 80px;
+            height: 80px;
+            border: 1px solid black;
+            margin-right: 3px;
+        }
+
+        .large{
+            width: 300px;
+            height: 400px;
+            border: 10px groove orange;
+            margin-top: 20px;
+            margin-left: 300px;
+        }
+
+        .select{
+            box-shadow: 3px 3px 3px gray;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>shop의 1~10까지 이미지를 아래 box 영역에 넣어 주세요</h3>
+    <div class="box">
+        <img src="" class="small">
+        <img src="" class="small">
+        <img src="" class="small">
+        <img src="" class="small">
+        <img src="" class="small">
+        <img src="" class="small">
+        <img src="" class="small">
+        <img src="" class="small">
+        <img src="" class="small">
+        <img src="" class="small">
+    </div>
+
+    <script>
+        // $(".box .small").each(function(idx){
+        //     $(this).attr("src","../image/shop/"+(idx+1)+".jpg");
+
+        // });
+
+        $("div.box>img").each(function(idx){
+            $(this).attr("src","../image/shop/"+(idx+1)+".jpg");
+
+        })
+    </script>
+
+    <img src="../image/mainImage/K-036.png" class="large">
+    <script>
+
+
+        // //작은 사진에 마우스를 올리면 select 적용. 사진 src를 얻어서 large에 넣기
+        // img2 = $(".large").attr("src");
+        // $(".small").mouseover(function(){
+        //     $(this).addClass("select");
+        //     let img = $(this).attr("src");
+        //     $(".large").attr("src",img);
+        // })
+
+
+        // //벗어나면 select 제거, 사진도 원래 사진으로
+        // $(".small").mouseout(function(){
+        //     $(this).removeClass("select");
+        //     // let img2 = $(".large").attr("src");
+        //     $(".large").attr("src",img2);
+        // })
+
+        let large_photo;
+        $("img.small").hover(function(){
+            $(this).addClass("select");
+            //large사진 저장
+            large_photo=$("img.large").attr("src");
+            //사진 src얻기
+            let imgSrc=$(this).attr("src");
+            //large에 적용
+            $("img.large").attr("src",imgSrc);
+        },function(){
+            $(this).removeClass("select");
+            //large에 원래 있던 사진으로 넣기
+            $("img.large").attr("src",large_photo);
+
+        })
+
+
+    </script>
+</body>
+
+</html>

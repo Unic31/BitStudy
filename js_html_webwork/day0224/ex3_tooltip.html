@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--BS5-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!--jquery-->
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+    <!--쌤폰트-->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Single+Day&display=swap"
+        rel="stylesheet">
+    <!--아이콘-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <style>
+        div.mytooltip {
+            
+            line-height: 1.5;
+            color: white;
+            width: 200px;
+            background-color: #f90;
+            border: 2px solid white;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 30px;
+            position: absolute;
+            opacity: 0.8;
+            display: none;
+        }
+
+        .view {
+            cursor: pointer;
+            background-color: #ccc;
+        }
+        ol.today li{
+            cursor: pointer;
+            font-size: 22px;
+            width: 200px;
+        }
+        ol.today li:hover{
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+    </style>
+    <script>
+        $(function () {
+            $("a").bind({
+                mousemove: function (e) {
+                    console.log(e.pageX, e.pageY);
+                    $("div.mytooltip").css({
+                        "left": e.pageX + "px",
+                        "top": e.pageY + "px"
+                    })
+                },
+                mouseover: function () {
+                    $("div.mytooltip").fadeIn('fast');
+                    $("div.mytooltip").html(`
+                    Java<br>
+                    HTML5<br>
+                    CSS<br>
+                    Mysql
+                    `).css("background-color","#f90");
+                },
+                mouseout: function () {
+                    $("div.mytooltip").fadeOut('fast');
+                }
+            });
+            $("b.view").bind({
+                mouseover:function(){
+                    //태그에 들어있는 색상 얻기
+                    let color=$(this).attr("color");
+                    let text=$(this).text();
+                    $("div.mytooltip").css("background-color",color).html(text);
+                    $("div.mytooltip").fadeIn();
+                },
+                mouseout:function(){
+                    $("div.mytooltip").fadeOut();
+                },
+                mousemove:function(e){
+                    $("div.mytooltip").css({
+                        left:e.pageX+"px",
+                        top:e.pageY+"px"
+                    })
+                }
+            })
+            $(".today li").bind({
+                mousemove:function(e){
+                    $("div.mytooltip").css({
+                        left:e.pageX+"px",
+                        top:e.pageY+"px"
+                    })
+                },
+                mouseover:function(){
+                    let pic = $(this).attr("photo")
+                    let title = $(this).text();
+                    $("div.mytooltip").html(`
+                        ${title}<br>
+                        <img src=${pic} width=100>
+                    `)
+                    $("div.mytooltip").fadeIn();
+                },
+                mouseout:function(){
+                    $("div.mytooltip").fadeOut();
+                }
+            })
+
+
+
+
+        })
+    </script>
+</head>
+
+<body>
+    <h4 class="alert alert-info">Tooltip 링크 부분에 마우스를 올려보세요</h4>
+    <br><br>
+    <a style="font-size: 25px;cursor: pointer;">TooltipTooltipTooltipTooltipTooltipTooltipTooltip</a>
+
+    <pre>
+        매일 오전 공개되고 있는 <b class="view" color="pink">코로나19</b> 현황 통계가 앞으로 일요일에는 발표되지 않습니다.
+
+        중앙방역대책본부는 오늘(24일) "최근 <b class="view" color="green">코로나19</b> 유행 안정화 추세를 반영한 중앙재난안전대책본부 결정에 따라 26일부터는 일요일을 제외하고 주 6회 발표한다"고 밝혔습니다.
+
+        일요일 통계는 이튿날 월요일에 함께 제공되며, 공휴일 통계 역시 공휴일 다음 날 확인할 수 있습니다.
+
+        방대본 관계자는 "일상회복 기조를 고려해 핵심업무 역량 집중을 위해 통계 보고 체계를 개편하는 것"이라고 설명했습니다.
+
+        방역당국은 지난 2020년 1월 국내에 <b class="view" color="blue">코로나19</b> 확진자가 처음 나온 이후 한동안 오전, 오후 하루 두 차례 확진자 현황 등을 발표했으며, 같은 해 3월부터는 0시 기준으로 취합해 오전 9시 30분 한 차례씩 관련 수치를 발표하고 있습니다.
+
+        코로나19 홈페이지(http://ncov.mohw.go.kr)에 공개되는 통계는 0시 기준 일일 신규 확진자와 입원 중인 위중증 환자, 사망자 수와 병상 현황, 예방접종 실적 등입니다.
+
+        방대본에 따르면, <b class="view" color="orange">코로나19</b> 상황이 안정세를 보임에 따라 영국과 캐나다, 호주 등이 <b class="view" color="red">코로나19</b> 현황을 주간 단위로 공개하고 있습니다.
+    </pre>
+    <hr>
+    <h2>오늘 나의 식사 및 쇼핑 목록입니다</h2>
+    <ol type="1" class="today">
+        <li photo="../image/food/1.jpg">에그샌드위치</li>
+        <li photo="../image/food/11.jpg">망고빙수</li>
+        <li photo="../image/shop/8.jpg">과베기회색스웨터</li>
+        <li photo="../image/shop/29.jpg">여름용모자</li>
+    </ol>
+
+    <div class="mytooltip">
+        Java<br>
+        HTML5<br>
+        CSS<br>
+        Mysql
+    </div>
+</body>
+
+</html>

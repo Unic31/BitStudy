@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Itim&family=Jua&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <style>
+        div.box>div{
+            border: solid 1px black;
+            width: 400px;
+            height: 130px;
+            margin-bottom: 10px;
+        }
+
+        #a{
+            background-image: url('../photo/C1.png'); /* x y 방향으로 반복된다(기본값)*/
+            background-size: 30px 30px; /*배경이미지 사이즈*/
+            border: 10px dotted deepskyblue;
+        }
+
+        #b{
+            background-image: url('../photo/11.jpg');
+            background-size: 80px 80px;
+            background-repeat: repeat-x; /*x방향으로만 반복*/
+            border: 10px double green;
+        }
+
+        #c{
+            border: 10px groove gold;
+            background-image: url('../photo/C6.png');
+            background-repeat: no-repeat; /*반복x*/
+            background-position: center;
+            opacity: 0.5; /*흐리게*/
+        }
+
+        #d{
+            border: 10px inset orangered;
+            background-image: url('../image/mainImage/K-041.png');
+            background-size: 100% 100%;
+            height: 200px;
+            color: white;
+            font-size: 30px;
+        }
+
+        #e{
+            border:10px dashed rebeccapurple;
+            background: url('../image/shop/14.jpg') no-repeat;
+            background-size: contain;
+        }
+
+        #f{
+            border: 5px solid limegreen;
+            background-image: url('../image/moviestar/1.jpg');
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+        /*
+        background-size:auto(원래 배경 이미지만큼 표시), contain(지정한 요스안에 배경 이미지가 다 들어오도록 확대/축소)
+                            cover(지정한 요소를 다 덮더록 배경 이미지를 확대/축소)
+                            크기값: n px, 백분율: 지정한 요소를 기준으로 백분율로 지정 
+        */
+    </style>
+
+</head>
+<body>
+    <div class="box">
+        <div id="a"></div>
+        <div id="b"></div>
+        <div id="c"></div>
+        <div id="d">안녕하세요</div>
+        <div id="e"></div>
+        <div id="f"></div>
+    </div>
+    <div class="hello">배경 이미지에 대한 공부</div>
+
+</body>
+</html>

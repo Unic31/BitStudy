@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <table border="1" style="border-collapse: collapse;width: 500px;">
+        <caption><b>th.star에 이벤트</b></caption>
+        <tr>
+            <th width="100" class="star">
+                <img src="../image/moviestar/12.jpg" width="80px">
+                <br>
+                <b>박보영</b> <!--innerText박보영-->
+            </th>
+            <td align="center" rowspan="5">
+                <img src="../image/moviestar/12.jpg" width="300" class="bigphoto">
+                <br>
+                <h2>박보영</h2>
+            </td>
+        </tr>
+        <tr>
+            <th width="100" class="star">
+                <img src="../image/moviestar/13.jpg" width="80px">
+                <br>
+                <b>박신혜</b>
+            </th>
+        </tr>
+        <tr>
+            <th width="100" class="star">
+                <img src="../image/moviestar/17.jpg" width="80px">
+                <br>
+                <b>신민아</b>
+            </th>
+        </tr>
+        <tr>
+            <th width="100" class="star">
+                <img src="../image/moviestar/18.jpg" width="80px">
+                <br>
+                <b>신세경</b>
+            </th>
+        </tr>
+        <tr>
+            <th width="100" class="star">
+                <img src="../image/moviestar/15.jpg" width="80px">
+                <br>
+                <b>설현</b>
+            </th>
+        </tr>
+    </table>
+
+    <script>
+        var tharr = document.querySelectorAll("th.star");//th안에 star 다 모아서 배열로 만듬
+       
+
+        for(var thElement of tharr){ //배열의 요소값을 다른이름으로 저장*********************여기도 잘 이해 안됨
+            thElement.onmouseover=function(){
+                //하위 태그에서 작은 사진의 src값
+                var smallSrc=this.querySelector("img").getAttribute("src")//getAttribute생략하고src만 써도됨
+                //큰사진의src값에 위의 사진 넣는다
+                document.querySelector(".bigphoto").setAttribute("src",smallSrc);
+                //이벤트가 발생한 th에서 하위 태그를 찾는다
+                var thname=this.querySelector("b").innerText;
+                document.querySelector("h2").innerText=thname;
+            }
+            
+        }
+    </script>
+</body>
+
+</html>

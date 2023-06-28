@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div style="margin: 30px 20px;">
+        <b>이름 : </b>
+        <input type="text" id="txtname" style="width:100px" autofocus><br><br>
+        <b>자바 : </b>
+        <input type="text" id="txtjava" style="width:100px"><br><br>
+        <b>HTML : </b>
+        <input type="text" id="txthtml" style="width:100px"><br><br>
+
+        <button type="button" id="btnresult" style="margin-left: 50px;">결과확인</button>
+
+        <div id="result" style="margin: 30px;">결과</div>
+
+        <script>
+            //자바 점수를 입력한 후 포커스가 벗어날 경우 발생하는 이벤트
+            document.getElementById("txtjava").onblur = function () {
+                //숫자가 아닐경우 경고후 포커스
+                if (isNaN(this.value)) {
+                    alert("숫자로만 입력해 주세요")
+                    this.value = "" //입력값 지우기
+                    this.focus();//포커스 추가
+                    return;//여기서 이벤트 함수 종료한다
+                }
+
+                //0~100을 벗어날경우 경고 표시후 징귀
+                // if(this.value<0 || this.value>100) {
+                if (!(this.value >= 0 && this.value <= 100)) {
+                    alert("0~100 사이값으로 입력 해주세요")
+                    this.value = "" //입력값 지우기
+                    this.focus();//포커스 추가
+                }
+            }
+
+            //html 점수를 입력한 후 포커스가 벗어날 경우 발생하는 이벤트
+            document.getElementById("txthtml").onblur = function () {
+                //숫자가 아닐경우 경고후 포커스
+                if (isNaN(this.value)) {
+                    alert("숫자로만 입력해 주세요")
+                    this.value = "" //입력값 지우기
+                    this.focus();//포커스 추가
+                    return;//여기서 이벤트 함수 종료한다
+                }
+
+                //0~100을 벗어날경우 경고 표시후 징귀
+                // if(this.value<0 || this.value>100) {
+                if (!(this.value >= 0 && this.value <= 100)) {
+                    alert("0~100 사이값으로 입력 해주세요")
+                    this.value = "" //입력값 지우기
+                    this.focus();//포커스 추가
+                }
+            }
+
+            //버튼 이벤트
+            document.getElementById("btnresult").onclick=function(){
+                //이름
+                var irum=document.getElementById("txtname").value;
+                //자바점수
+                var java = Number(document.getElementById("txtjava").value);
+                //HTML점수
+                var html = Number(document.getElementById("txthtml").value);
+                //총점
+                var total=java+html;
+                //평균
+                var avg=total/2;
+                
+                //디브의 요소값을 미리 얻는다
+                var r=document.getElementById("result");
+
+                // //r에 결과값을 넣는다
+                // r.innerHTML="이 름 : "+irum+"<br>";
+                // r.innerHTML+="자바점수 : "+java+"<br>";  //+= : 기존값에 추가할 경우
+                // r.innerHTML+="HTML점수 : "+html+"<br>";
+                // r.innerHTML+="총점 : "+total+"<br>";
+                // r.innerHTML+="평균 : "+avg+"<br>";
+
+                var s=
+                `
+                이 름 : ${irum}
+                자바점수 : ${java}
+                HTML점수 : ${html}
+                총 점 : ${total}
+                평 균 : ${avg}
+                `;
+
+                r.innerText=s;
+
+
+            }     
+            </script>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+package study.day0308;
+
+//멤버 내부 클래스
+class Outer {
+	int a = 10;// 인스턴스
+	static int b = 20;// 스태틱
+
+	class Inner {
+		int c = 30;
+		// static int d=40;//내부클래스에서 static멤버변수 선언 불가능
+
+		public void show() {
+			// 멤버 내부클래스에서는 외부클래스의 모든 변수를 사용 가능하다
+			System.out.println("Inner 내부 클래스의 메서드");
+			System.out.println("a=" + a);
+			System.out.println("b=" + b);
+			System.out.println("c=" + c);
+		}
+	}
+
+	static class Inner2 {
+		int e = 50;
+		static int f = 60;// static 내부 클래스에서는 static변수 선언 가능
+
+		public void show() {
+			// static 내부클래스에서는 외부클래스의 static변수만 접근 가능
+			System.out.println("Inner 내부 클래스의 메서드");
+//			System.out.println("a="+a);//외부클래스의 인스턴스 멤버변수는 접근 불가능
+			System.out.println("b=" + b);
+			System.out.println("e=" + e);
+			System.out.println("f=" + f);
+		}
+	}
+
+	public void write() {
+		// 멤버 내부클래스는 기능별로 클래스로 따로 구현하고자 할때 많이 사용
+		Inner in1 = new Inner();
+		in1.show();
+
+		Inner2 in2 = new Inner2();
+		in2.show();
+	}
+}
+
+public class Ex11InerClass {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+//		Outer out=new Outer();
+//		out.write();
+
+		// 내부 클래스를 직접 선언 후 메소드를 호출하고자 할 경우
+		Outer.Inner in1 = new Outer().new Inner();// member 내부 클래스(바깥 인스턴스 생성 후 new
+		in1.show();
+
+		Outer.Inner2 in2 = new Outer.Inner2();// static 내부 클래스(static는 인스턴스 필요없이 클래스명
+		in2.show();
+
+	}
+
+}

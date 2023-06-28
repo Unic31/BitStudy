@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="one">class One-1</div>
+    <div class="one">class One-2</div>
+    <div class="one">class One-3</div>
+    <hr>
+    <div class="apple">
+        <div class="banana">apple-banana</div>
+        <div class="kiwi">apple-kiwi</div>
+    </div>
+    <h3>h3-1</h3>
+    <h3>h3-2</h3>
+    <h3>h3-3</h3>
+    <h3>h3-4</h3>
+
+    <h1>여기부터 스크립트 코드 결과 입니다</h1>
+    <script>
+        //복수개의 엘리먼트를 반환-class명이 one인 모든 요소값을 반환
+        var a1 = document.getElementsByClassName("one");
+        document.write(`class one은 총 ${a1.length}개 입니다<br>`);//3
+        //a1의 첫번째 요소(0번)의 style값 중 font-size 를 20px로 변경
+        a1[0].style.fontSize = "20px"
+        //a1의 두번째 요소(1번)의 color 값을 red로 변경
+        a1[1].style.color = "red"
+        //a1의 세번째 요소(3번)dml border을 3px solid gray로 변경
+        a1[2].style.border = "3px solid gray"
+
+        //a1의 전체 일괄적으로 글꼴 변경
+        for (var a of a1) //for문이 한줄이면 {} 안해도됨
+            a.style.fontFamily = "Comic Sans Ms"
+        ///////////////////////////////////////////////////////
+
+
+
+
+        //복수개의 엘리먼트를 반환-tag명이 div인 모든 요소값을 반환
+        var a2 = document.getElementsByTagName("div");
+        document.write(`div의 갯수는 총 ${a2.length}개 입니다<br>`);//6
+
+        //a2 배열 전체에 일괄적으로 배경색 추가하기
+
+        // for(var idx in a2){
+        //     a2[idx].style.backgroundColor="#ffffcc";        
+        // }
+        
+        for (var i = 0; i < a2.length; i++) {
+            a2[i].style.backgroundColor = "#ffffcc";
+        }
+        
+        // for (var b of a2){
+        //     b.style.backgroundColor = "#ffffaa";
+        // }
+
+        //class명이 one인 엘리먼트의 첫번째 요소값 1개만 반환-배열이 아님
+        var a3 = document.querySelector(".one");  //**************querySelectorAll로 바꿔도 왜 안됨? 밑에꺼 때문에 씹히나?
+        document.write(`1111class one은 총 ${a3.length}개 입니다<br>`);//undefined
+        a3.style.fontSize = "50px";   //************여기서 var하고 선언해도 하나는 바껴야 되는거 아님?
+
+
+        //class명이 one인 엘리먼트의 모든 요소값을 배열형태로 반환
+        var a4 = document.querySelectorAll(".one")
+        document.write(`class one은 총 ${a4.length}개 입니다<br>`);//3
+        for (var a of a4) {
+            a.style.color = "magenta";
+        }
+
+        //class apple 바로 아래의 class명이 banana인 요소값
+        var a5 = document.querySelector(".apple>.banana");
+        a5.style.textDecoration = "underline";
+
+        //class apple 바로 아래의 class명이 kiwi인 요소값
+        var a6 = document.querySelector(".apple>.kiwi");
+        
+
+        //복수개의 엘리먼트 반환-배열타입
+        var a7 = document.querySelectorAll("h3");
+        document.write(`태그 h3는 총 ${a7.length}개 입니다<br>`);//4
+        for(var a of a7){
+            a.style.backgroundColor="lightgray";
+        }
+    </script>
+
+</body>
+
+</html>

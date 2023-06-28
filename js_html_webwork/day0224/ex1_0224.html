@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--BS5-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!--jquery-->
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+    <!--쌤폰트-->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Single+Day&display=swap"
+        rel="stylesheet">
+    <!--아이콘-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <style>
+        #btnres{
+            position: absolute;
+            left: 250px;
+            top: 30px;
+            width: 130px;
+        }
+        #view1{
+            position: absolute;
+            left: 70px;
+            top: 120px;
+        }
+        #view2{
+            position: fixed;
+            right: 20px;
+            top: 130px;
+            font-size: 25px;
+            width: 300px;
+            text-align: right;
+        }
+
+        #view2 h4:hover {
+            cursor: pointer;
+            background-color: gray;
+        }
+
+        #view3{
+            position: absolute;
+            left: 150px;
+            top: 250px;
+            font-size: 22px;
+            border: 5px inset orange;
+            width: 400px;
+            height: 100px;
+            text-align: center;
+            border-radius: 30px;
+            padding: 20px;
+        }
+    </style>
+    <script>
+        $(function () {
+            let movie = "", theater = "";
+            $("#btnres").click(function () {
+                let s = `
+                <button type="button" class="btn btn-outline-danger" id="btn1">극장</button>&nbsp;&nbsp;
+                <button type="button" class="btn btn-outline-danger" id="btn2">영화선택</button>
+
+            `
+                //$("#view1").html(s);
+
+                $("#view1").empty();
+                $("#view1").append(s);
+            });
+            //극장목록 나타내기
+            $(document).on("click", "#btn1", function () {
+                var s = `
+                <h4 class="theater">CGV강남점</h4>
+                <h4 class="theater">MEGABOX강남점</h4>
+                <h4 class="theater">CGV교보점</h4>
+                `;
+                $("#view2").html(s);
+            });
+
+            //영화제목 나타내기
+            $(document).on("click", "#btn2", function () {
+                var s = `
+                <h4 class="movie">모범택시</h4>
+                <h4 class="movie">괴물</h4>
+                <h4 class="movie">슬램덩크</h4>
+                `;
+                $("#view2").html(s);
+            });
+            //영화rhks 또는 영화제목 클릭시 출력
+            $(document).on("click", "#view2 h4", function () {
+                //영화관인지 제목인지 판별을 위해서 class를 준다
+                let selectClass = $(this).attr("class");
+                let text = $(this).text()
+                if (selectClass == 'movie')
+                    movie = text;
+                else
+                    theater = text;
+
+                let s = `
+                    극장명 : ${theater}<br>
+                    영화제목 : ${movie}
+                `;
+                $("#view3").html(s);
+            })
+        });
+
+
+
+    </script>
+
+
+
+</head>
+
+<body>
+    <button type="button" id="btnres" class="btn btn-success btn-lg" >영화예매버튼</button>
+
+    <div id="view1"></div>
+    <div id="view2"></div>
+    <div id="view3"></div>
+</body>
+
+</html>

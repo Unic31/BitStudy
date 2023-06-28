@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Single+Day&display=swap"
+        rel="stylesheet">
+    <style>
+        div.result {
+            position: absolute;
+            left: 200px;
+            top: 200px;
+            font-size: 35px;
+            font-family: 'Jua';
+            width: 500px;
+            height: 150px;
+            line-height: 150px;
+            border: 1px solid gray;
+            text-align: center;
+        }
+
+        div.container {
+            position: absolute;
+            top: 30px;
+            left: 200px;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var r = document.querySelector("div.result");
+
+            //입력후 엔터 이벤트
+            document.getElementById("txtinput").onkeyup = function (e) {
+                if (e.keyCode == 13) {
+                    r.innerHTML = this.value;
+                }
+            }
+
+
+            //r 의 테두리 변경
+            document.getElementById("chkborder").onclick = function () {
+                if (this.checked)
+                    r.style.border = "10px groove gold";
+                else
+                    r.style.border = "1px solid gray";
+            }
+
+
+            //글자크기
+            var fsize = document.getElementsByName("fsize");
+            for (var i = 0; i < fsize.length; i++) {
+                fsize[i].onclick = function () {
+                    r.style.fontSize = this.value;
+                }
+            }
+
+
+            //글자색
+            document.getElementById("fcolor").onchange = function () {
+                r.style.color = this.value;
+            }
+
+
+            //배경색
+            document.getElementById("bcolor").onchange = function () {
+                r.style.backgroundColor = this.value;
+            }
+
+
+            //글꼴 변경
+            var fname = document.getElementsByName("fname");
+            for (var i = 0; i < fname.length; i++) {
+                fname[i].onclick = function () {
+                    r.style.fontFamily = this.value;
+                }
+            }
+        }//onload
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <b>입력후 엔터를 누르세요 : </b>
+        <input type="text" id="txtinput" placeholder="입력후 엔터" style="width:250px;">
+
+
+        &nbsp;&nbsp;&nbsp;<!--공백 3칸 -->
+        <input type="checkbox" id="chkborder">테두리
+
+
+        <br>
+        <b>글자크기 : </b>
+        <input type="radio" name="fsize" value="10px">10px
+        <input type="radio" name="fsize" value="20px">20px
+        <input type="radio" name="fsize" value="30px">30px
+        <input type="radio" name="fsize" value="35px" checked>35px
+        <br>
+        <b>글자색 : </b>
+        <input type="color" id="fcolor" value="#000000">
+        &nbsp;&nbsp;
+        <b>배경색 : </b>
+        <input type="color" id="bcolor" value="#ffffff">
+        <br>
+        <b>글꼴선택:</b>
+        <input type="radio" name="fname" value="Jua" checked>Jua
+        <input type="radio" name="fname" value="Nanum Pen Script">Nanum
+        <input type="radio" name="fname" value="Single Day">Single
+        <input type="radio" name="fname" value="Gamja Flower">Gamja
+
+    </div>
+    <div class="result">비트캠프</div>
+</body>
+
+</html>

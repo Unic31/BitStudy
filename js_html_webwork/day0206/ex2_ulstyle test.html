@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Itim&family=Jua&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <style>
+        /* div 태그의 class가 title 인 경우에만 적용 */
+
+        div.title{
+            /* em:상위 태그의 n배의 글자 크기 */
+            /* rem:최상위 태그의 n배의 글자 크기 */
+            font-size:2.5rem;
+            font-family:'Itim';
+            text-align: center;
+            text-shadow: 3px 3px 3px gray;
+        }
+
+        span.menu{
+        
+        }
+
+        span.menu>ul{
+            list-style: none;
+            
+            
+        }
+
+        span.menu>ul>li{
+            float: left;
+            font-family: 'Jua';
+            font-size: 24px;
+            width: 150px;
+            height: 70px;
+            line-height: 70px;
+            margin-right: 10px;
+
+            border: 2px solid tomato;
+            border-radius: 20px;
+            background-color: rgb(168, 195, 219);
+            color: rgb(217, 71, 200);
+        }
+        /*마우스를 올렸을때 스타일 적용*/
+        span.menu>ul>li:hover{
+            background-color: rgb(203, 223, 123);
+            cursor: pointer;
+            color: black;
+            box-shadow: 5px 5px 5px gray;
+        }
+
+        span.menu>ul>li:active{
+            background-color: beige;
+            color: aqua;
+        }
+
+        img.main_photo{
+            /*위치변경*/
+            position: absolute; /*absolute:절대좌표, relative:상대좌표*/
+            left: 200px;
+            top: 200px;
+        }
+
+        img.main_photo:active{
+            left: 300px;
+            top: 300px;
+        }
+
+        div.외부 {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="외부">
+    <div class="title">Bitcamp Class Menu</div>    
+    <span class="menu">
+        <ul>
+            <li>메인</li>
+            <li>오시는길</li>
+            <li>클래스과정</li>
+            <li>접수</li>
+        </ul>
+    </span>
+    </div>
+<img src="../photo/C1.png" class="main_photo">
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Itim&family=Jua&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <style>
+        body *{
+            font-size: 2rem;
+            font-family: 'Jua';
+        }
+
+        #m1>img{
+            border: 2px solid red;
+            border-radius: 50px;
+            width: 130px;
+            height: 130px;
+        }
+    </style>
+</head>
+<body>
+    <h3>marquee 기본값(left, scroll)</h3>
+    <marquee>
+        <b>Have a Nice day!!!</b>
+    </marquee>
+
+    <h3 style="color: orange;">marquee - right로 변경</h3>
+    <marquee direction="right">
+        <b style="color: orange;">Have a Nice day!!!</b>
+    </marquee>
+
+    <h3 style="color: rgb(40, 47, 92);">marquee - right, slide 로 변경</h3>
+    <marquee direction="right" behavior="slide">
+        <b style="color: rgb(40, 47, 92);">Have a Nice day!!!</b>
+    </marquee>
+
+    <h3 style="color: rgb(40, 92, 66);">marquee - right, alternate(왕복) 으로 변경</h3>
+    <marquee direction="right" behavior="alternate" scrollamount="20">
+        <b style="color: rgb(40, 92, 66); background-color: aqua";>Have a Nice day!!!</b>
+    </marquee>
+
+    <h2>사진에 적용해보자</h2>
+    <marquee id="m1" direction="right">
+        <img src="../photo/1.jpg">
+        <img src="../photo/2.jpg">
+        <img src="../photo/3.jpg">
+        <img src="../photo/4.jpg">
+        <img src="../photo/5.jpg">
+
+    </marquee>
+    
+</body>
+</html>

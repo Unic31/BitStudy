@@ -1,0 +1,309 @@
+-------cmd에서 오라클 계정 생성------
+alter session set "_ORACLE_SCRIPT"=true;
+create user 계정이름 identified by 비밀번호;
+grant connect,resource to 계정이름;
+alter user 계정이름 default tablespace user quota unlimited on users;
+
+system
+--연습용 계정 생성 --한줄실행 ctrl+enter
+create user c##계정이름 identified by a12324;
+--오라클 최신버전은 계정 앞에 c##을 붙여서 생성해야 한다
+--그런데 c##을 안붙이고 생성하려면 아래 코드 추가 후 생성하면 된다
+alter session set "_ORACLE_SCRIPT"=true
+--위의 c##scott제거
+drop user c##scott;
+--scott 라는 계정 생성하기
+create user scott identified by a1234;
+--기본권한주기
+grant connect, resource to scott;
+
+
+레코드 다시 공부
+
+
+열 : 세로대가리 column
+행 : 열의 값 row
+
+테이블생성
+create table student(
+	num number(5),
+	name varchar(10),
+	score number(3) default 10,
+	day date NOT NULL,
+	CONSTRAINT(제약조건) pk_topic(제약조건이름-임의로설정) PRIMARY KEY(num)--num키에 프라이머리키(기본키) 추가
+);
+
+
+
+
+
+-명령어-
+where 컬럼 like 'A%' or 컬럼 like 'S%'; //컬럼중 A로 시작하거나 S로 시작하는거
+abs(-6):절대값(무조건양수)
+ceil 올림, floor내림
+round(2.356,1):소수점한자리까지 반올림, trunc(2.356,1):소수점 한자리까지 반내림
+round(235678,-1):뒤에서첫번째(1의자릿수) 올림=235680 , round(235678,-2):뒤에서두번째(10의자릿수)올림=235700
+pwer(2,3):지수승=2의3승
+mod(7,2):나머지=1
+문자열합치기 concat('JAVA','SPRING') == 'JAVA' || 'SPRING' //두개가 같다 //출력할때 ename||'이름' 하는것과 같음
+lpad('happy',10,'*')특정 *로 남은칸 왼쪽채우기
+substr('Happy Day',3,3):ppy substr('Happy Day',-3,3):day //문자열 앞or뒤의 n번째 부터  n글자 출력-
+substr('문자열asdf',앞에서n|뒤에서는-n,부터n칸출력)
+replace('Hello Kitty','t','*')--문자열중 t를 *로
+instr('Good Day','Day')--6 번째에서 day 발견//없는거면 0
+trim:공백제거 ltrim:좌공백제거
+sysdate:현재날짜
+
+-to_char-
+to_char(sysdate,'yyyy-mm-dd am hh:mi:ss') --2023-03-14 03:22:04//am이나pm 암거나 붙여도 오전오후 출력됨
+to_char(2345678,'L999,999,999')--L은 그 지역의 화폐로 자동.9의 갯수만큼 자릿수//2,345,678
+to_char(2345678,'$000,000,000')--0의 갯수만큼 자릿수로 출력하면서 빈자릿수는 0//002,234,678
+to_char(2.3,'0.00')--2.30//남는걸 0으로 채움
+null값일경우 특정 값으로 출력(오라클:nvl, mysql:ifnull)
+nvl(mgr,1000),nvl(comm,0)--mgr의 값이 null일때 1000으로,com값이 null일때 0으로//null인값과 다른값 더하면 null
+ename,deptno,decode(deptno,10,'서울',20,'강원도',30,'경기도',40,'제주도')--ename출력하고 deptno출력하고 그 뒷열에
+                                                                       --deptno가 10일때 20일때 등등 다른값 출력됨
+order by 열 desc:내림차순, 생략이 오름차순
+
+-그룹함수- from 테이블 groub by 기준 having 조건
+count(*),max,min,sum,avg: //round(avg(열),-1)처럼 avg는 소수점 n자리까지 올림한다
+
+
+-----------------CRUD-------------------
+
+행(데이터, 열의값)에대하여
+
+-Create = Insert - 추가//행추가 - into 랑 세트
+기본모양 : insert into 테이블명(컬럼1, 컬럼2) values (컬럼1값, 컬럼2값)
+행추가
+insert into student (num,name,score,day) values (1,'이름1',100,sysday);
+
+-Read = Select - 읽기(조회,출력// - from
+기본모양 : select 컬럼명 from 테이블명 where 조건
+        : select 그룹바이 절에 지정된 컬럼1, 그룹바이별로 집계할 값 from 어디에서가져올지 gourp by 그룹으로 묶을 컬럼값 having 조건추가;
+select *(전체) from 테이블명 where 컬럼1=값1 //테이블 중 컬럼1의 값이 값1인것만
+테이블의 한 컬럼만 조회
+select DISTINCT name from student
+컬럼의 제한
+select num,name,score from student; --day는 제외하고 출력
+행의제한
+select * from student where num=1; --테이블 num의값이 1인것만 출력
+정렬(desc오름차순, asc내림차순)
+select * from student order by 정렬의 기준이 되는 열 desc;--asc는 생략가능
+페이징
+select * from student offset 1 rows;--첫번째 이후의 행만 출력
+select * from student offset 0 rows fetch next 2 rows only;--0번째(시작부터)  두개의 행만 출력
+select 두번 예시
+select ename,sal from emp where sal>(select avg(sal) from emp); --급여(sal)가 sal 의 평균보다 더 높은 사람만 ename 과 sal 을 출력하시오
+
+-Update = Update - 수정 - set 이랑 세트
+기본모양 : update 테이블명 set 컬럼=바꿀값 where 기준이될컬럼=값
+값수정 : update 테이블명 set num=바꿀값, name=바꿀값 where score='값' //score에 '값' 이란 가지고 있는 행의 다른값 변경
+행 수정
+update student set score=80, name='이름2' where num=1;--num값이 1인것의 값들 변경
+
+-delete = Delete - 삭제 - from
+기본모양 : delete from 테이블 where 조건
+delete from 테이블명 where 조건(score<80) //80이하인 것들만 삭제
+행 삭제
+delete from student where num=1;--num의 값이 1인 행을 삭제
+------------------------drop이랑 alter은 컬럼의 값이 아니라 직접적으로 컬럼에 간섭------------------------------
+-alter:테이블 구조 수정(컬럼에대하여 제약조건, 컬럼추가 등)
+컬럼추가
+alter table 테이블명 add 컬럼 타입(양) default 50;
+컬럼삭제
+alter table 테이블명 drop column 삭제할컬럼명;
+컬럼타입수정
+alter table 테이블명 modify 바꿀컬럼명 타입(양);
+컬럼명 변경
+alter table 테이블명 rename colunm 바뀌기전컬럼명 to 바뀐후컬럼명; --column이란 명령어는 drop와 rename뒤에만 온다
+제약조건 제거
+alter table 테이블명 drop CONSTRAINT 조건명;
+제약조건 추가
+alter table 테이블명 add CONSTRAINT 조건명 타입(unique등(제약조건넣을컬럼명))
+alter table person add CONSTRAINT person_uq_name unique(name);
+alter table person add constraint person_ck_genger check (gender in ('남자','여자')); --gender에 남자 여자 외 다른 데이터 넣으면 오류
+
+테이블제거
+drop table student;
+
+SEQUENCE:시퀸스
+seq.nextval:다음값
+seq.currval:현재값
+
+시퀀스 생성
+create sequence seq_student
+
+시퀀스다음값.nextval
+insert into student (num,name,score,day) values (seq_student.nextval,'이름2',150,sysday);--시퀀스는 중복되지 않게 차레로 계속 증가함. 프라이머리키랑 쓰기 좋다.
+
+시퀀스조회.currval
+select seq_student.currval from dual;--시퀀스가 얼마나 진행됐는지 볼수있다
+
+---------------DB정규화(Normalization)-foreign key(외래키) //메인의 기본키에 외래키로 묶는? 메인테이블과 서브테이블을 하나의 키값으로 연결시켜 묶어 한번에 볼수있는?
+alter table 서브테이블명 add constraint info_fk_num foreign key(num) REFERENCES 메인테이블명(num); --메인테이블의 키(num)를 가져와서 서브에 
+
+-join으로 두 테이블을 합해서 필요한 정보를 가져와보자. ppt43p
+-inner join 또는 equi join이라고 한다. 서로 num값이 같을 경우에만 가져온다.//양쪽 테이블에 공통적으로 갖고있는 컬럼이 아니라 각 테이블만 가지고 있는 컬럼이면 테이블명(별칭) 생략 가능하다.
+select 메인별칭.num , 메인별칭.name , 메인별칭.height , 메인별칭.ban , 서브별칭.addr , 서브별칭.hp , 메인별칭.java , 메인별칭.spring 
+from 메인테이블 메인별칭, 서브테이블 서브별칭 --별칭준것
+where 메인별칭.num=서브별칭.num; --메인과 서브의 num이 같으면
+
+-outer join//추가되지 않은 데이터 조회(서브쪽에+)
+select 메인별칭.num , 메인별칭.name , 메인별칭.height , 메인별칭.ban , 서브별칭.addr , 서브별칭.hp , 메인별칭.java , 메인별칭.spring 
+from 메인테이블 메인별칭, 서브테이블 서브별칭 --별칭준것
+where 메인별칭.num=서브별칭.num(+); --메인과 서브의 num이 같으면
+
+위에서 나온 연결되지 않은 값만 보고싶으면 아래처럼
+select 메인별칭.num , 메인별칭.name , 메인별칭.height , 메인별칭.ban , 서브별칭.addr , 서브별칭.hp , 메인별칭.java , 메인별칭.spring 
+from 메인테이블 메인별칭, 서브테이블 서브별칭 --별칭준것
+where 메인별칭.num=서브별칭.num(+) and 위에서null나오는컬럼 is null; --메인과 서브의 num이 같으면
+
+---------------오라클 기본 틀 예시-------------
+--seq_food 시퀸스
+create SEQUENCE seq_food;
+--restaurant 테이블
+--food_num기본키, food_name문자열(30), food_price숫자(7)
+create table restaurant(
+    food_num number(3) CONSTRAINT table_pk_num PRIMARY key,
+    food_name varchar2(30),
+    food_price number(7)
+);
+--resorder테이블
+--order_num기본키, order_name문자열(20) food_num->restaurant의 food_num을 외부키로 설정(on delete cascade), 
+--order_day날짜타입(예약날짜), jumun_day날짜타입(현재날짜저장), inwon숫자(3)
+create table resorder(
+    order_num number(3) constraint resorder_pk_num primary key,
+    order_name varchar2(20),
+    food_num number(3),
+    order_day date,
+    jumun_day date default sysdate,
+    inwon number(3),
+    constraint resorder_fk_num foreign key(food_num) references restaurant(food_num) on delete cascade
+);
+
+--1.데이터 추가하기
+--스파게티23000,새우볶음밥11000,전복죽19000,새우튀김10000,짜장면5000
+insert into restaurant values(seq_food.nextval,'스파게티',23000);
+insert into restaurant values(seq_food.nextval,'새우볶음밥',11000);
+insert into restaurant values(seq_food.nextval,'전복죽',19000);
+insert into restaurant values(seq_food.nextval,'새우튀김',10000);
+insert into restaurant values(seq_food.nextval,'짜장면',5000);
+--2.주문테이블
+--이상아 스파게티주문 예약일2023-11-20 주문일:현재시간등록 인원수:4
+--강호동 새우볶음밥주문 예약일 2023-12-25 주문일:현재시간등록 인원수:3
+--강호동 전복죽주문 예약일 2023-12-20 주문일:현재시간등록 인원수:3
+--이영자 스파게티주문 예약일 2023-05-11 주문일:현재시간등록 인원수:2
+insert into resorder values(seq_food.nextval,'이상아',1,'2023-11-20',sysdate,4);
+insert into resorder values(seq_food.nextval,'강호동',2,'2023-12-25',sysdate,3);
+insert into resorder values(seq_food.nextval,'강호동',3,'2023-12-20',sysdate,3);
+insert into resorder values(seq_food.nextval,'이영자',1,'2023-05-11',sysdate,2);
+--3.출력
+--주문자 예약일 음식명 음식가격 주문일(연-월-일 시:분) 인원수
+select order_name 주문자, order_day 예약일, food_name 음식명, to_char(food_price,'L999,999') 가격, to_char(jumun_day,'YYYY-MM-DD HH:MI') 주문일, inwon 인원수
+from restaurant rt, resorder od
+where rt.food_num=od.food_num;
+--4.레스토랑 메뉴중 전복죽 삭제 후 예약 테이블에서도 삭제되었는지 확인하기
+delete from restaurant  where food_num=3;
+
+
+----------------PL-QAL:언어제 절차적 요소를 추가해서 프로그래밍한것-------------
+SET SERVEROUTPUT ON --콘솔창에서 결과값 나오게 하기. 기본값은 OFF
+SET SERVEROUTPUT OFF --콘솔창에서 결과값 안나오게 함
+accept 변수명 prompt '값을 입력해주세요'; --키 입력값 저장하고 밑에서 '&변수명' 하면 입력값 불러와짐
+-기본틀
+DECLARE
+  변수1 타입(양)
+  변수2 타입(양)
+BEGIN
+ 각종 출력 또는 로직들
+	DBMS_OUTPUT.PUT_LINE(); 한줄출력명령어(자바 PLITNLN같은것)
+END;
+/
+-기본틀2
+DECLARE
+    v_sangpum varchar2(30);
+    v_su number(3);
+    v_dan number(7);
+    v_num number(3):=1;--검색해서 가져올 num값
+BEGIN
+    select  sangpum,su,dan
+    into v_sangpum, v_su, v_dan --받아올 변수들
+    from shop where num=v_num; --v_num에 1을 담았기 때문에 num이 1인 다른 컬럼값들을 변수에 담는것.
+    
+	DBMS_OUTPUT.PUT_LINE(v_num||'번 상품 설명');
+    DBMS_OUTPUT.PUT_LINE('상품명 : '||v_sangpum);
+    DBMS_OUTPUT.PUT_LINE('수량 : '||v_su);
+    DBMS_OUTPUT.PUT_LINE('단가 : '||v_dan);
+    DBMS_OUTPUT.PUT_LINE('총금액 : '||v_su*v_dan);
+END;
+/
+---BEGIN에 들어갈 로직들---
+-조건문				-다중 조건문			-반복문
+if 조건식 then		if 조건식1 then			loop
+	문장1;				문장1;					명령들;
+else				elsif 조건식2 then			(idx:=idx+1 은 idx++ 같은거)
+	문장2;				문장2;					exit when; --break 같은거
+end if;				else					end loop;
+						문장3;
+					end if;
+
+-case조건문(switch같은거)
+변수:=
+	case 표현식
+		when 값1 then 결과1
+		when 값2 then 결과2
+        when 값3 then 결과3
+        else 결과4
+    end;
+
+-예외처리(exception)
+exception
+	when 오류명 then
+		오류떴을때 할것
+	when 오류명2 then
+		오류떴을때 할것2
+	when others then
+		그 외 오류떴을때 할것
+
+-for반복문
+for 변수명 in [reverse] 시작값..최종값 loop
+	반복시킬문장들;
+end loop;
+
+------------------------------------------
+db타입을 적용한는 방법, db의 데이터를 레코드(행row,값) 단위로 가져옴
+DECLARE
+	변수명1 테이블명.컬럼명%type:='티셔츠'' --db의 컬럼명 타입을 적용(db에서 바뀌더라도 가져옴)
+	변수명2 사용자명.테이블명%rowtype; --레코드 단위로 데이터를 읽기 위한 선언//사용자명의 테이블명의 row 모두 가져옴
+BEGIN
+	select * into 변수명2 from 테이블명 where 컬럼명=변수명1 --db가 바뀌어도 조회 가능. 
+
+	DBMS_OUTPUT.PUT_LINE('상품:'||변수명2.컬럼1);
+    DBMS_OUTPUT.PUT_LINE('색상:'||변수명2.컬럼2);
+    DBMS_OUTPUT.PUT_LINE('수량:'||변수명2.컬럼3);
+    DBMS_OUTPUT.PUT_LINE('단가:'||변수명2.컬럼4); --이것들처럼 값이 뭐로 바뀌든 타입을 변수에 담아뒀기 때문에 나중에 볼때 무리없음
+-------------------------------------------------
+여러 레코드 조회 CURSOR
+    cursor 커서명
+    is
+    select 문장; --select 조회의 결과를 cursor 에 저장
+    
+    for 레코드명 in 커서명 loop --위의 문장 받은거
+    명령;
+    end loop;
+레코드 예시
+DECLARE
+    cursor s1
+    is
+    select * from shop order by dan desc;
+    v_cnt number(5);
+BEGIN
+	DBMS_OUTPUT.PUT_LINE('번호    상품명 색상  수량  단가  구입일');
+    for s in s1 loop --*받은게 
+    DBMS_OUTPUT.PUT_LINE(s.num||'   '||s.sangpum||' '||s.color||'   '||s.su||'  '||s.dan||' '||s.today);
+    end loop;
+    
+    select count(*) into v_cnt from shop;--shop으로부터 count값을 v_cnt가 가져온다
+    DBMS_OUTPUT.PUT_LINE('총 '||v_cnt||'개의 상품이 있습니다');
+END;

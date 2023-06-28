@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Itim&family=Jua&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <style>
+        .posa *{
+            font-size: 1.5rem;
+            font-family: 'Gowun Dodum';
+            width: 250px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="posa">
+        <input type="button" value="alert는?"
+        onclick="alert('alert는 확인창만 나옴')">
+
+        <p>
+        <button type="button"
+        onclick="prompt('입력창이랑','임시값이 나옴')">prompt란?</button>
+
+        <br><br>
+        <button type="button"
+        onclick="confirm('확인,취소 가 나옴')">conform이란?</button>
+    </div>
+
+
+    <hr><hr>
+    <button type="button" onclick="test1()">alert</button>
+    <h3 id="result1"></h3>
+
+    <script>
+        function test1()
+        {
+            alert("함수로 실행한 alert");
+            //이벤트 안에서 document.write 로 출력시 다 지워지고 새로 출력
+            //document.write("버튼 1을 클릭함")
+
+            //innerHTML : html 태그가 적용되서 나타남
+            //innerText : 글자만 출력(즉 html 태그도 그냥 글자로 출력이됨)
+            document.getElementById("result1").innerHTML="<b>버튼 1 클릭<b>";
+        }
+    </script>
+
+    <button type="button" onclick="test2()">이름입력</button>
+    <h2 id="result2"></h2>
+
+    <script>
+        function test2()
+        {
+            //이름을 입력 받는다, 취소시 null 값 반환
+            var name=prompt("질문창","임시값")
+
+            // 방법1
+            // document.getElementById("result2").innerHTML=
+            //     "<b>내 이름은 "+name+"입니다</b>"
+
+            // 방법2
+            document.getElementById("result2").innerHTML=
+                `<u>내 이름은 <span style='color:green'> ${name}</span>입니다<u>`
+           
+        }
+    </script>
+
+    <button type="button" onclick="test3()">컨펌</button>
+    <h2 id="result3"></h2>
+
+    <script>
+        function test3()
+        {
+            var ans=confirm("데이터를 저장 할까요?");
+            console.log(ans); //크롬브라우저->검사->콘솔에서 확인
+
+            if(ans==true)
+                document.getElementById("result3").innerText="데이터를 잘 저장 했어요!"
+            else
+                document.getElementById("result3").innerText="저장을 취소 했어요!"
+
+        }
+    </script>
+</body>
+</html>

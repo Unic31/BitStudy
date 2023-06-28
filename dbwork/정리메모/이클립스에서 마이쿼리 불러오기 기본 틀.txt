@@ -1,0 +1,48 @@
+static final String MYSQL_DRIVER = "com.mysql.cj.jdbc.Driver";
+	static final String MYSQL_URL = "jdbc:mysql://localhost:3306/bit701?serverTimezone=Asia/Seoul";
+
+	Scanner sc = new Scanner(System.in);
+
+	public EX1DBMunje() {
+		try {
+			Class.forName(MYSQL_DRIVER);
+			System.out.println("마이쿼리 드라이버 성공");
+		} catch (ClassNotFoundException e) {
+			System.out.println("마이쿼리 드라이버 실패" + e.getMessage());
+		}
+	}
+
+	public Connection getConnection() {
+		Connection conn = null;
+		try {
+			conn = DriverManager.getConnection(MYSQL_URL, "angel", "1234");
+			System.out.println("로컬 마이쿼리 연결 성공");
+		} catch (SQLException e) {
+			// TODO: handle exception
+			System.out.println("로컬 마이쿼리 연결실패" + e.getMessage());
+		}
+
+		return conn;
+
+	}
+
+public void 메소드명(){
+Connection conn = getConnection();
+		Statement stmt = null; // rs는 select에서만 필요함.CRUD에서는 필요없다.
+		String sql = "";
+
+		try {
+			stmt = conn.createStatement();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+			}
+		}
+}

@@ -1,0 +1,480 @@
+작성하기 전 선언부터 하고 생각하기
+초기값 주면서 상태 선언
+
+책-146p
+
+
+day0306 - Ex1Array2cha
+day0307-6 해야됨
+
+
+배열, 반복문 공부
+클래스(오브젝트  static등, 객체, 퍼블릭-프라이빗-프로텍티드 따로 공부
+call by value, call by reference(day0307-ex5,6)
+버퍼, 리더, IOE, DTO, List, 스레드
+백터, 컬렉션
+객체배열은 각 번지마다 new로 선언
+
+
+
+printf - 1글자:%c, 정수:%d(%10d : 10칸중 우측정렬로 출력(왼쪽 남는자리는 공백으로 채워짐)),
+		문자열:%s, 실수:%f(%5.1f : 전체자리수5,소수점이하1, %010.2f : 전체자리수 10(우측에 출력, 남는자리는 0으로 출력))
+		%자체 출력시 %%
+ascii(아스키코드) A:65, a:97 등 문자의 수치화
+상수 : ex- final String MESSAGE="MES" //상수는 보통 대문자, final상수는 값 변경 불가
+실수 : float(4)소수점 포함 8자리만 정확하게-double(8)소수점 포함 15자리만 정확하게
+정수 : byte(1)-short(2)-int(4)-long(8)
+char 'a'; //char은 한글자. 2바이트라 한글도 가능.
+String "a";
+int a;
+float a=1.2f //숫자 뒤에 f를 써야 4바이트 float타입으로 인식한다
+boolean b2=f1==f2 //f1과 f2를 비교하여 true, false값을 b2에 넣는다
+강제 형변환으로 (int)char a == 97 이 나온다(문자a를 int로 강제 형변환 하면 숫자가 나옴)
+char m=66//내부적으로 문자B(아스키코드 66)로 인식
+int m='A'//내부적으로 아키코드65(문자A)로 인식
+묵시적 형변환(연산시 자동으로 결정되는 타입)
+int+int=int, double+int=double, String+int=String, char+int=int 이런식으로 연산했을때 더 큰 타입을 따라간다
+문자열에서 + 는 나열
+.trim().length();//trim()은 앞 뒤 공백 제외 하고 길이(사이에 값은 안됨)
+.charAt(숫자) : 문자열에서 숫자번지에 해당하는 문자(1글자)반환
+.indexOf(문자) : 해당 문자가 어디에 있는지 인덱스값(숫자) 반환
+.lastIndexOf(문자) : 마지막 '문자'의 인덱스 값 반환
+.startsWith("문자열") : 변수가 "문자열"로 시작하면 true반환
+.endsWith("문자열") : 변수가 "문자열"로 끝나면 true반환
+.substring(5) : 5번 인덱스부터 끝까지 반환
+.substring(3,10) : 3~(10-1) 인덱스에 해당하는 문자열 반환(3~9까지 반환)
+.toLowerCase() : 전부 소문자로 반환
+.toUpperCase() : 전부 대문자로 반환
+.replace('a', 'b') : 문자 또는 단어를 a에서 b로 변경 후 반환(char은 '' , String는 " ")
+대입연산자 =, +=, -=, /=, %= 는 초기값이 필요
+관계연산자 : > < >= <= == !=
+논리연산자 : &&(and) ||(or) !(not)
+a+=10; // a=a+10(a에 10을 더한값이 다시 a가 된다)
+==는 기본형에서는 값을 비교하고 클래스타입에선 주소를 비교한다
+문자열 경우에 정확하게 값으로 비교하려면 equals사용. equalsIgnoreCase는 대소문자 무시하고 철자만 비교
+m1.equals(m2) | m1.equals("Apple") | m1.equalsIgnoreCase(m2); //같으면 true, 틀리면false반환
+A.compareTo(B) : 두 문자열의 아스키코드값의 차이를 반환. 반환값이 음수이면 A의 값이 더 작다는것. ==0 이몉 같다는뜻.
+System.exit(0); : switch문 default뒤에 넣으면 시스템종료
+static - class method
+no static - instance method
+Access Modifiers(접근제어자) - public, default, protected, private
+finall : 상속, 오버라이딩, 변형금지
+Abstract : 상속하면 이건 꼭 구현해라 강제 하는것
+
+
+
+-------배열------
+char []asdf;//배열 선언만 한것.
+asdf=new char[4];//메모리 할당과 동시에 초기값 지정. 아직 생성이 아니다! 데이터 안넣으면(0,null)나옴
+보통 위 아래를 붙여서 char []asdf=new char[4]; 라고 한다
+Employee[] emp = new Employee[cnt]; 라고 했으면 각 배열마다 객체를 따로 생성해 줘야됨.
+포문을 돌리면서 emp[i] = new Employee(); 
+
+int []arr1 = {34,56,78,100,39}; 처럼 바로 값 넣어도 됨
+출력:for(int a:arr1){  syso("%5d",a)  } 또는 포문돌리기
+이차원배열예시
+int [][]arr= {
+				{34,56,100},		//0번행 
+				{47,77,99,100},		//1번행
+				{55,66,77,88,99}	//2번행
+		};		
+		System.out.println("***출력 1***");
+		for(int i=0;i<arr.length;i++) { //행 0 1 2
+			for(int j=0;j<arr[i].length;j++) { //열은 각 행의 길이만큼만 증가 
+				System.out.printf("%5d",arr[i][j]);
+			}
+			System.out.println();//열 출력 다 하면 열 포문 빠져나와 줄 띄우기 하고 다시 행 포문으로
+		}		
+		System.out.println("***출력 2***");
+		for(int []a:arr) {
+			for(int n:a) {
+				System.out.printf("%5d",n);
+			}
+			System.out.println();
+		}
+
+split(",") : ,로 분리하여 배열타입을 반환. *********아래는 split예시*************
+String colors="red,blue,green,orange,pink,black";
+		String []mycolor=colors.split(",");
+		System.out.println("총"+mycolor.length+"개 분리함"); //출력 : 총6개 분리함
+		//for문으로 출력(배열 갯수만큼 자동 반복)
+		for(String ch:mycolor) {
+			System.out.println(ch);//분리한 색상표 출력
+		}
+wrapper class : 인티저 더블 플롯등 변환하기 위한 클래스 아래가 예시
+Integer.parseInt : 문자로 읽은 후 숫자로 변환. 형태는 숫자인데 문자타입인걸 변환(이런게 static메소드, new로 호출하지 않음)
+Scanner에서 int입력 후 Line할거면 인티저.파세인트 써야되는듯(엔터를 인식해버림)
+
+call by value : 주소가 아닌 값만 전달된다(모든 기본형, String은 여기 해당). 변경된 값 알고싶으면 return받아야됨
+call by reference : 객체(클래스와 배열)은 reference(주소)가 전달. 메소드의 인자와 메인의 배열변수는 주소가 같은 변수이다.
+		주소가 같으면 원격으로 변경 가능. 다른곳에서 바껴도 리턴없이 값이 바뀜(String은 해당 안됨)
+객체(object)
+객체의 상태(state객체의 속성)
+필드(field객체 안의 변수)-데이터
+메소드(method객체 안의 함수)-알고리즘
+return : 메소드 밖으로 입력값을 반환하면서 메소드 실행 종료.
+void : return되는 타입이 없음. 아무것도 return 안해야 에러발생 안함
+-void ex-
+String getName(); - String형인 name를 return
+String[] getName()- String형인 name를 배열에 담는다
+int getAge(); - int형인 age를 return
+void setName(String name) - retunr하는게 없음.
+
+클래스에서 필드선언-클래스 안 메소드에서 지역변수 선언, 클래스 안 생성자에서 지역변수 선언
+
+멤버변수(필드(field)전역변수랑 비슷하지만 다름. 일단은 같다고 생각할것) : 메소드 밖에서 선언된 변수
+지역변수 : 메소드 안에서 선언된 변수
+
+정적(static) : 객체(인스턴스)에 소속된게 아니라 클래스에 고정된 멤버. 클래스 로딩이 끝나는 즉시 바로 사용 가능(인스턴스 생성 안해도됨)
+				static 영역에 할당된 메모리는 모든 객체가 공유할수있다는 장점이 있지만 프로그램 종료시까지 메모리가 할당된채로 남아있음.
+				this라는 인스턴스 변수가 존재하지 않음. 접근하고 싶을 경우 new로 생성 후 접근. 클래스명.static 로 호출 가능.
+class Apple{
+public String mes1="Hello";//static이 안붙은것들은 인스턴스 변수. 밑에서 new로 생성 후 접근
+private String mes2="Happy";//은닉(Apple 이라는 클래스 안에서만 사용 가능)
+public static final String MES="Have a Good Day";//상수화 할때 주로 static, fianl 붙인다. 변경불가값(상수)
+												//다른곳에서 사용할때 얘만 new로 생성 안하고 바로 Apple.MES로 바로 쓸수있다. 읽기만 하고 변경 불가능.
+
+//private를 밖에서 쓸려먼 get, set 필요함. 소스-제네레이트. 아래는 예시
+public void setMes2(String mes2){//값 변경.
+	this.mes2=mes2;
+}
+public String getMes2(){//값 반환.리턴값은 보이드
+	retunr mes2;
+}
+}
+호출예시:Apple a=new Apple();
+syso(a.mes1);
+syso(a.getMes2());//get으로 반환
+a.setMes2("asdf");//set으로 값 변경 가능
+****필드예시***
+class Number{
+static int num = 0; //클래스 필드-모든 인스턴스가 하나의 저장공간을 공유하기에 항상 같은 값을 가지게됨(다른 클래스에서 불러와 값을 바꾸면 바꾼값이 고정되는듯)
+int num2 = 0; //인스턴스 필드-인스턴스가 생성될때마다 생성되므로 인스턴스마다 각기 다른 값을 가지게 된다.
+}
+*************정적 메소드 예시*************
+class Name{
+    static void print() { //클래스 메소드
+	System.out.println("내 이름은 홍길동입니다.");
+    }
+    void print2() { //인스턴스 메소드
+	System.out.println("내 이름은 이순신입니다.");
+    }
+}
+public class Static_ex {
+    public static void main(String[] args) {
+        Name.print(); //인스턴스를 생성하지 않아도 호출이 가능
+    	
+        Name name = new Name(); //인스턴스 생성
+        name.print2(); //인스턴스를 생성하여야만 호출이 가능
+    }
+}
+윤년의 공식 : 년도%4==0 && 년도%100!=0 || 년도%400==0
+-----class Date 에 대해서-----
+Date date=new Date(); //생성
+int y=date.getYeaer()+1900; //현재 년도-1900인 값이 구해지기 때문에 다시1900 더한다
+int m=date.getMonth()+1;//월이 0~11까지 구해지기 때문에 +1을 해준다
+int d=date.getDate(); //오늘이 며칠인지
+int w=date.getDay(); // 오늘이 무슨 요일인지 일:0, 월:1... 토:6까지 숫자로 반환
+String week=w==0?"일":w==1?"월":w==2?"화":w==3?"수":w==4?"목":w==5?"금":"토"; -> week는 요일로 반환됨
+------class Math에 대해서------
+.max(a,b); .min(a,b); .pow(a,b);-a에b승 .ceil(double)-올림 .floor(double)-내림 .round(double)-반올림
+
+-----5번씩 출련하는데 총 세번 반복-----
+for(int row=1;row<=3;row++) {
+			for(int col=1;col<=5;col++) { //row가 1일때 col이 1~5까지, row가 2일때 col이 3이 될때까지... 반복
+				System.out.printf("%8s",msg);
+			}
+			System.out.println();//5개 출력할때마다 줄 띄움}
+
+OverLoading method : 같은 클래스 내의 메소드 중 메소드 명은 같고 인자가 다른경우. 리턴타입도 달라도됨
+Overriding : 부모클래스의 기능을 올라타서 덮어씀(재정의)
+class Cal{
+    public int sum(int v1, int v2){
+        return v1+v2;
+    }
+    // Overloading
+    public int sum(int v1, int v2, int v3){
+        return this.sum(v1,v2)+v3; //this는 본인
+    }
+}
+class Cal3 extends Cal{
+    public int minus(int v1, int v2){
+        return v1-v2;
+    }
+    // Overriding
+    public int sum(int v1, int v2){
+        System.out.println("Cal3!!");
+        return super.sum(v1,v2); //super은 부모클래스
+    }
+ 
+}
+
+
+
+Variable Arguments : public static int sum(int...n){ //같은 타입으로 갯수 상관없이 인자로 받음(배열타입)
+		System.out.println("갯수:" + n.length);
+		int s = 0;
+		for (int i = 0; i < n.length; i++)
+			s += n[i];
+		return s;
+		}
+
+day0307-Ex5, 6Callby
+call by value : 주소가 아닌 값만 전달(모든 기본형, String 여기 해당)
+call by reference : 주소를 전달(클래스?, 배열). 주소가 전달되기 때문에 지역변수라 하더라도 기능별로 나눠서 작업 가능
+
+생성자(Constructor) : 클래스의 이름과 같은 메소드. 초기값 지정(클래스가 인스턴스화 되었을때 실행?)
+class Foo{
+	public Foo(String asdf){ // String타입의 asdf를 받아옴.
+		this.asdf = asdf //this는 이 클래스가 인스턴스화 되었을때 그 인스턴스를 가르키는 특수한것
+	}
+}
+
+
+----예외----
+try{
+//예외가 발생 가능한 문장들;
+}catch(예상되는 예외객체1 변수명){
+//해당 예외가 발생했을 시 수행할 문장들;
+}finally{
+//예외발생 여부와 상관없이 수생할 문장들;
+}
+
+-----제네릭과 컬렉션------
+Set - 비순차, 정렬x 중복x
+Map - <키, 밸류>  , 순차
+List - 중복 순차
+
+
+
+
+
+------------sql 연결예시--------------
+public class 클래스명 {
+	static final String ORACLE_DRIVER = "oracle.jdbc.driver.OracleDriver"; // 패키지이름="클래스이름" 을 문자열로 인식
+	static final String ORACLE_URL = "jdbc:oracle:thin:@localhost:1521:xe";
+//	static final String ORACLE_URL="jdbc:oracle:thin:192.168.0.24:1521:xe";//강사pc
+
+	클래스명() {
+		try {
+			Class.forName(ORACLE_DRIVER);
+			System.out.println("오라클 드라이버 성공");
+		} catch (ClassNotFoundException e) {
+			System.out.println("오라클 드라이버 실패" + e.getMessage());
+		}
+	}
+	public Connection getConnection() {
+		Connection conn = null;
+		try {
+			conn = DriverManager.getConnection(ORACLE_URL, "angel", "a1234");
+			System.out.println("로컬 오라클 연결 성공");
+		} catch (SQLException e) {
+			System.out.println("로컬 오라클 연결 실패" + e.getMessage());
+		}
+		return conn;
+	}
+}
+public void 메소드명() {
+		Connection conn = this.getConnection();
+		Statement stmt = null;
+		ResultSet rs = null; // select는 이거 필요?
+		String sql = "sql문장";
+
+		try {
+			stmt = conn.createStatement();
+			// 데이터를 가져오는 select문은 무조건 executeQuerry() 로 sql문을 실행한다(반환타입때문에)
+			rs = stmt.executeQuery(sql);
+
+			// rs.next()는 다름 레코드로 이동. 다름 데이터가 있으면 true반환, 없으면 false
+			while (rs.next() == true) {// while문에서 ==true는 보통 생략
+				타입 변수이름 = rs.get타입(1); // 컬럼 번호로 가져오는 방법
+				String sangpum = rs.getString(2);
+
+				int su = rs.getInt("su");// 컬럼명으로 가져오는 방법
+
+//				String today=rs.getString("today");년 월 일 시 분 초 다나옴
+				Timestamp today = rs.getTimestamp("today");
+//				SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd EEEE"); //EEEE=목요일
+//				SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm"); //HH=24시간기준으로
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd a hh:mm"); // h=12시간 a:오전/오후
+
+		} catch (SQLException e) {
+			System.out.println("sql오류" + e.getMessage());
+		} finally { // 익셉션 날지안날지 모르니까 닫는건 항상 finally
+			try {
+				if (rs != null)
+					rs.close();
+				if (stmt != null)
+					stmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e2) {
+				// TODO: handle exception
+			}
+		}
+		}
+		}
+하고 항상 메인에서 호출 : 클래스명 임의변수명 = new 클래스명();
+
+--------------------------jsp에서 DAO 작성. 정답이없다. 공부하고 공부해서 유동적으로 잘 판단하고 변수설정--------------------
+
+DB에서 데이터를 가져올 경우select(return값 필요)
+가져올 데이터가 복수 - public List<Dto> getDatas() {
+						List<Dto> list = new Vector<>();	}	
+가져올 데이터가 단수 - public Dto getData()	{
+						Dto dto = null;	}
+그 뒤 공통적으로		Connection conn = db.getMysqlConnection();
+						PrepareStatement pstmt = null;
+						ResultSet rs = null;
+						String sql = "select .... "
+					try{
+						pstmt = conn.prepareStatement(sql);
+						pstmt.setInt(1, dto.get변수 or 받아오는 특정변수);//바인딩 필요할시
+						rs = pstmt.executeQuerry();
+					 복수 while(rs.next()) , 단수 if(rs.next());
+					String writer = rs.getString("writer");
+					int count = rs.getInt("count");
+					Dto dto = new Dto(writer, count)
+					list.add(dto); <<<<<<<<<<복수일경우 무조건
+					
+					} catch {
+						실패시 오류출력등
+					} finally{
+						db.dbClose(rs, pstnt, conn)
+					}
+					retrun <<<<<<<<<<중요!! 복수일시 list, 단수일시 dto 리턴값
+
+DB엣 데이터를 가져오지 않을 경우(void)
+					public void 메소드명(update, insert는 Dto dto로 전체 / 그 외는 int num  이런느낌으로 유동적으로)
+						Connection conn = db.getMysqlConnection();
+						prepareStatement pstmt = null;
+						String sql="asdfasdf ";
+					try{
+						pstmt=conn.prepareStatement(sql);
+						pstmt.setInt(1, num)//바인딩 필요할시 해주고
+						pstmt.excecute();// void들은 이걸로
+					}
+
+
+-------------세션과 쿠키--------------------------
+세션session:서버영역에 저장. request객체에 의해서 생성
+생성 - HttpSession ses = request.getSession();
+저장 - ses.setAttribute(name, value);
+얻기 - object value = ses.getAttribute(name);
+		String value = (String)ses.getAttribute(name);
+제거 - if(value!=null){ //value값이 null이 아니라면==value가 있다면==세션이 있어서 로그인된상태
+		ses.remove.Attribute(name);
+}
+
+쿠키cookie:클라이언트의 웹브라우저나 특정 폴더에 저장
+생성 - Cookie cok = new Cookie(cname, cvalue);
+저장 - cok.setMaxAge(60);//60초뒤 사라짐
+얻기 - Cookie[] c = request.getCookies();
+if(c != null){//쿠키가 있을경우
+	for(int i=0;i<c.length;i++){
+		String name = c[i].getName();
+		String value = c[i].getValue();
+	}
+}
+제거 - c[i].setMaxAge(0);//쿠키는 시간을 0 으로 만들어야 사라짐
+		response.addCookie(c[i]);
+
+-------------------------jsp-------------------------
+jsp 에서 $쓸때는 앞에 \ 해줘야함
+페이지 이동:response.sendRedirect("주소.jsp");
+js에서 페이지 이동:location.href="주소.jsp?변수명="+값
+
+
+
+데이터 받아오기 : request.getParameter("값");
+사진이 넘어왔으면 MultipartRequest mulRequest = null; 하고 mulRequest.getParameter로
+
+------------------------ajax------------------------------
+xml방식
+<data>
+	<name city="서울">홍길동</name>
+	<age>23세</age>
+</data>
+
+-xml읽어오기
+$("#버튼").click(function(){
+		$.get("../data/ex1_data.xml",function(res){ //res대신 암거나 써도됨
+			$(".영역").append("이름 :"+$(res).find("name").text()+"<br>");//res(지정데이터)의 하위태그에 name을 찾아서 text값		
+			$(".영역").append("주소 :"+$(res).find("name").attr("city")+"<br>");//res(지정데이터)의 하위태그name에 속성값city
+			$(".영역").append("나이 :"+$(res).find("age").text()+"<br>");//res(지정데이터)의 하위태그name에 속성값city	
+		});
+	});
+
+-xml배열읽기
+$("#btn1").click(function(){
+		$.ajax({
+			type:"get",
+			url:"../data/ex3_arrdata.xml",
+			dataType:"xml",//출력(반환)없이 보내기만 할거면 데이터타입은html(delete같은 경우 값만 보내고 반환안함)
+	1번방법	data:"name="+보낼데이터 //url쪽에서request로 name을 읽으면 "보낼데이터" 를 받을수있다
+	2번방법 data:{"name":보낼데이터}
+			success:function(res){//성공했을시
+				let s="";
+			
+			$(res).find("stu").each(function(idx,ele){//stu가 많기때문에 for each로 반복출력
+				s+="이름 : "+$(ele).attr("name")+"<br>";//ele의 속성 중 name을 찾음
+				s+="java점수 : "+$(ele).find("java").text()+"<br>";//ele중 java를 찾아서 그 text를 가져옴
+				s+="spring점수 : "+$(ele).find("spring").text()+"<br>";//ele중 java를 찾아서 그 text를 가져옴
+				s+="html점수 : "+$(ele).find("html").text()+"<br>";//ele중 java를 찾아서 그 text를 가져옴
+				s+="<hr>";
+			});
+			
+			$(".view").html(s);
+			},
+			statusCode:{
+				404:function(){
+					alert("파일이 없어요");
+				},
+				500:function(){
+					alert("서버 오류")
+				}
+			}
+		});
+	});	
+
+json방식
+{
+	"name":"김길동","addr":"seoul","age":"45세"
+}
+
+json읽기
+$("#버튼").click(function(){
+		$.getJSON("../data/ex2_data.json",function(res){
+			$(".view").append("이름:"+res.name+"<br>");
+			$(".view").append("주소:"+res.addr+"<br>");
+			$(".view").append("나이:"+res.age+"<br>");		
+		});
+	});
+
+json배열읽기
+$("#btn2").click(function(){
+		$.ajax({
+			type:"get",
+			url:"../data/ex4_arrdata.json",
+			dataType:"json",
+			success:function(res){//성공했을시
+				let s="";
+				$.each(res,function(idx,ele){
+					s+="이름:"+ele.name+"<br>";
+					s+="취미:"+ele.hobby+"<br>";
+					s+="핸드폰:"+ele.hp+"<br>";
+					
+					s+="<hr>";
+				});
+				$(".view").html(s);
+			},
+			statusCode:{
+				404:function(){
+					alert("파일이 없어요");
+				},
+				500:function(){
+					alert("서버 오류")
+				}
+			}
+		});
+	});

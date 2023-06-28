@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ReactBootProjectApplication<ReactBootProject>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "bit.study.main.ReactBootProjectApplication",
+            "projectName": "ReactBootProject",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

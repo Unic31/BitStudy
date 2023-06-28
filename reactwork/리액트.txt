@@ -1,0 +1,198 @@
+리액트 세팅 - cmd에서
+cd C:\bit701naver\study\reactwork //으로 이동 후
+npx create-react-app 파일명 //으로 패키지 생성
+cd ./파일명 //으로 경로 이동
+npm start //실행(또는 yarn start)
+
+npm 모듈 재설치 - https://heytech.tistory.com/427 (git bash로 하면됨)
+
+public의 index.html에서 부트스트랩 주소같은거 넣으면 모든곳에서 사용가능
+
+npm install axios
+npm install react-router-dom
+
+src/App.css //import해서 사용하기 위한 전체css
+src/index.js //최상위 컴포넌트 적용
+public/index.html //부트스트랩 등 적용
+
+
+
+
+rsf로 div까지 자동완성
+
+<img alt='' src={require(`../폴더/${photo}`)}/>
+
+
+//true는 보이고 false면 안보임
+<h5>사진 보였다/숨겼다 하기</h5>
+            <label>
+                <input type='checkbox' defaultChecked onClick={(e)=>{
+                    setShow(e.target.checked)
+                }} />&nbsp;사진 보이게 하기
+            </label>
+            <br/><br/>
+            {
+                show &&
+            <img alt='' src={mycat} width={300} border='10'/>
+            }
+
+useEffect(()=>{
+    console.log("호출)
+},[])//처음 실행시 한번 호출
+
+useEffect(()=>{
+        console.log("useEffect 3-photo 변경됨")
+    },[photo]);//photo 값 변경시에만 자동호출
+
+배열에 추가하기 
+const addName=()=>{
+    setArray(Array.concat(추가할거))
+}
+
+배열에 삭제하기
+const deleteName=(idx)=>{
+    setNameArray(nameArray.filter((item,i)=>i!==idx));
+}
+onClick={()=>{
+    deleteName(idx) //idx를 보내주면 위에서 i랑 비교해서 같지 않은것만 배열에 다시 넣는것.
+}}
+
+const [count,setCount]=useState(1); //steat변수선언
+const countRef=useRef(1); //ref변수선언
+
+state란 steat:{count}//변수명 바로씀
+const stateIncreEvent=()=>{
+    set(count+1);//값이 변경될때마다 랜더링 발생
+}
+(e.target.value) 씀
+
+Ref란 Ref:{countRef.current} //변수명에 current붙여야됨
+const refIncreEvent=()=>{
+    countRef.current=countRef.current+1;//값은 변경되지만 랜더링되지는 않는다
+} 태그 안에 기본값처럼 쓸땐 ref={countRef} 처럼 씀
+countRef.current.value 라고 씀
+
+asdf.toFixed(1)은 소숫점 한자리까지 출력됨
+
+//4개의 input 태그 입력시 호출되는 함수
+const changeData=(e)=>{
+    //console.log(e.target.name);
+    //console.log(e.target.value);        
+    const {name,value}=e.target; //e.target 에서 name 과 value 추출
+
+    setData({
+        ...data,/* 나머지 데이타는 그대로 유지*/
+        [name]:value /*name 에 해당하는 value 만 변경 */
+    })
+    console.log(data);
+}
+
+### axios 의 정의
+
+**: axios 는 현재 커뮤니티에서 가장 많이 사용하는 http 통신 라이브러리이다**
+
+**엑시오스는 Promise 기반의 API 형식이 다양하게 제공되어 별도의 로직을 구현할 필요없이 API 만으로도 간편하게 원하는 로직을 구현할수 있다**
+
+**(Promise 란? 서버에 데이타를 요청하여 받아오는 동작과 같은 비동기 로직 처리에 유용한 자바스크립트 객체이다)**
+
+**//Http Get요청**
+
+**axios.get(‘url주소’).then().catch();**
+
+**//http post 요청**
+
+**axios.post(‘url주소’).then().catch();**
+
+**//http 요청에 대한 옵션 속성 정의**
+
+**axios({**
+
+**method:’get’,**
+
+**url:’url 주소’,**
+
+**….**
+
+**});**
+
+//처음 실행시 list함수 호출
+    useEffect(()=>{
+        dataListEvent();
+    },[])
+
+RequestParam 값 받는거
+RequestBody ???
+
+String bucketPath="https://kr.object.ncloudstorage.com/bit701-bucket-113/react/";
+
+
+//select key 예시
+<insert id="insertInfo" parameterType="InfoDto">
+		insert into myinfo (irum,address,birthday) values (#{irum},#{address},#{birthday})
+		<selectKey keyProperty="num" resultType="int" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+</insert>
+
+최상위폴더에 .env란 파일 만들면 전역변수 설정 가능
+REACT_APP_변수명="https://kr.object.ncloudstorage.com/bit701-bucket-113/react/" 이런식으로 작성
+env수정시 재시작 해줘야함
+
+컴포넌트에서 사용할땐
+const photoUrl=process.env.REACT_APP_변수명; //으로 사용
+
+//input type='file' 인거 넘기는 방법
+const addphoto=(e)=>{
+        const imageFile=new FormData();
+        imageFile.append("upload",e.target.files[0]);
+        imageFile.append("num",`${item.num}`);
+
+        axios({
+            method:'post',
+            url:"/info/photo",
+            data:imageFile,
+            headers:{'Content-Type':'multipart/from-data'}
+        }).then(res=>{
+            setPhoto(res.data)
+            getList();
+        })
+    }
+
+<input type='file' style={{display:'none'}} ref={file} onChange={addphoto}/>
+<AddAPhotoIcon onClick={()=>{ file.current.click(); }}/>
+
+@AllArgsConstructor //모든 생성자 주입
+
+//emp 파라미터 읽기
+    const {emp}=useParams();
+    return (
+        <div>
+            <h3 className='alert alert-info'>About page</h3>
+            {
+                emp===null?<h3>저는 지금 개백수입니다</h3>
+                :<h4>저는 {emp}에 다니고 있습니다</h4>
+            }
+        </div>
+    );
+
+//리액트에서 페이지 이동시 Navigate이용해서 이동
+    const navi=useNavigate();
+
+
+//submit이벤트 발생 시 호출 함수
+    const onSubmitEvent=(e)=>{
+        //기본이벤트 무효화(action호출 막기 위해서)
+        e.preventDefault();
+        if(foodPhoto.length===0){
+            alert("사진을 반드시 업로드 해주세요");
+            return;
+        }
+    }
+<form onSubmit={onSubmitEvent}></form>
+에서 submit버튼을 누르면 onSubmit함수가 실행된다. //이벤트로 submit-action을 막을수있음
+<form> 안에 넣을것
+
+
+//페이징 처리처럼 기본값이 없을수도 있을땐 리퀘스트파람으로 null일때 기본값 넣어주기
+public Map<String, Object> list(@RequestParam(defaultValue = "1") int currentPage)
+

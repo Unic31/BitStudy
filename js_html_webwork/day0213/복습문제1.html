@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--animal의 C2.png를 img태그를 이용해서 나타낸 후 자바 스크립트 이벤트를 이용해서 마우스를 올리면 
+    C4.png로 변경하고 마우스를 벗어나면 다시 C2.png로 나타내시오
+    onmouseover, onmouseout 이벤트롤 이용
+    setAttribute 함수 이용-->
+    <img src="../image/animal/C2.png" id="C2">
+        <script>
+             //var c2=document.getElementById("C2");
+            document.getElementById("C2").onmouseover=function(){
+                //this.setAttribute("src","../image/animal/C4.png");
+                //c2.setAttribute("src","../image/animal/C4.png");
+                C2.setAttribute("src","../image/animal/C4.png");
+            }
+            document.getElementById("C2").onmouseout=function(){
+                this.setAttribute("src","../image/animal/C2.png");
+            }
+        </script>
+</body>
+</html>

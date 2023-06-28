@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>과제</title>
+
+
+</head>
+
+<body>
+    <div style="margin: 50px;">
+        <div>이름 <input type="text" id="irum"></div>
+        <br>
+        <div>자바 <input type="text" id="java"></div>
+        <br>
+        <div>HTML <input type="text" id="html"></div>
+        <br>
+        <button id="button">결과확인</button>
+        <div id="result"></div>
+      
+
+        <script>
+            var a = document.getElementById(" ");
+            var b = document.getElementById("java");
+            var c = document.getElementById("html");
+            var d = document.getElementById("result")
+
+            b.onblur = function () {
+                if (isNaN(this.value)) {
+                    alert("숫자로만 입력해주세요");
+                    this.value = "";
+                    this.focus();
+                }
+
+                if (100<this.value || this.value<0) {
+                    alert("0~100의 수를 입력해주세요");
+                    this.value = "";
+                    this.focus();
+                }
+
+            }
+            c.onblur = function () {
+                if (isNaN(this.value)) {
+                    alert("숫자로만 입력해주세요");
+                    this.value = "";
+                    this.focus();
+                }
+
+                if (100<this.value || this.value<0) {
+                    alert("0~100의 수를 입력해주세요");
+                    this.value = "";
+                    this.focus();
+                }
+
+            }
+
+            document.getElementById("button").onclick=function (){
+                var a = irum.value;
+                var b = Number(java.value) + Number(html.value);
+                var c = b/2;
+
+                document.getElementById("result").innerHTML=`이름:${a}, 총점:${b}, 평균:${c}`;
+
+            }
+        </script>
+
+
+</body>
+
+</html>

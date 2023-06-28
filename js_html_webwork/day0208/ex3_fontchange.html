@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Itim&family=Jua&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+
+    <style>
+        #font{
+            margin: 50px 50px;
+            font-size: 24px;
+            font-family: 'Jua';
+            color: orangered;
+        }
+    </style>
+
+    <script>
+        //head 안에서 이벤트 함수를 만들경우 반드시 onload 함수 안에서 구현한다.
+        window.onload=function(){
+            var font=document.getElementById("font");
+            
+            //글꼴 변경 이벤트
+            document.getElementById("selfont").onchange=function() {
+                font.style.fontFamily=this.value;
+            }
+            
+            //글꼴 크기 변경 이벤트             
+            document.getElementById("selsize").onchange=function(){
+                font.style.fontSize=this.value;
+            }
+
+            //글꼴 색상 변경 이벤트
+            document.getElementById("selcolor").onchange=function(){
+                font.style.color=this.value;
+                
+        }
+            //체크박스 이벤트(채우기)
+            document.getElementById("box").onclick=function() {
+                console.log("value :"+this.value);//value값 미지정시 on
+                console.log("check :"+this.checked);//true,false
+
+                if(this.checked)
+                    font.style.backgroundColor="#add8e6"
+                else
+                    font.style.backgroundColor="white"
+            }
+            //체크박스 이벤트(테두리) 
+        document.getElementById("boxborder").onclick=function() {
+            console.log("value :"+this.value);
+
+            if(this.checked)
+                font.style.border=this.value;//미리 저장해둔 value 값을 적용
+            else
+                font.style.border=""
+        }
+
+    }
+    </script>
+
+</head>
+<body>
+    <div style="margin: 10px 50px;">
+        <b>글꼴 변경 : </b>
+        <select id="selfont">
+            <option>Gowun family</option>
+            <option>Itim</option>
+            <option selected>Jua</option>
+            <option>Nanum Pen Script</option>
+        </select>
+        <br><br>
+        <b>글자 크기 변경 : </b>
+        <select id="selsize">
+            <option>10px</option>
+            <option>14px</option>
+            <option>18px</option>
+            <option selected>24px</option>
+            <option>30px</option>
+            <option>40px</option>
+            <option>50px</option>
+            <option>60px</option>
+
+
+        </select>
+        <br><br>
+        <b>글자색 선택 :</b>
+        <select id="selcolor">
+            <option>orangered</option>
+            <option>pink</option>
+            <option>#3cb371</option>
+            <option>#00bfff</option>
+            <option>rgb(122,100,200)</option>
+            <option>rgba(122,100,200,0.5)</option>
+            <option>#db7093</option>
+        </select>
+        <br><br>
+        <b>채우기색 선택 :</b>                                      <!--글자를 눌러도 체크가 된다-->
+        <label><input type="checkbox" id="box">채우기색</label>  <!--laber 태그 안에 checkboxㄴ radio를 만들 경우 -->
+        <br><br>
+        <b>테두리선 :</b>
+        <label>
+            <input type="checkbox" id="boxborder" value="10px groove gray">
+            테두리선
+        </label>
+    </div>                                                       
+    <div id="font">
+        Happy Day<br>
+        행복한 하루
+    </div>
+</body>
+</html>

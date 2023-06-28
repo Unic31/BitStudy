@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Single+Day&display=swap"
+        rel="stylesheet">
+    <title>Document</title>
+    <style>
+        #box {
+            border: none;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+            width: 500px;
+            height: 200px;
+            background-color: white;
+            color: black;
+            font-family: none;
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>입력 후 엔터를 누르세요 :
+        <input type="text" value="안녕하세요" id="text">
+        <label><input type="checkbox" id="boxstyle">테두리</label>
+    </div>
+    <br>
+    <div>글자크기 :
+        <label>
+            <input type="radio" class="fontsize" name="px" value="10px">10px
+        </label>
+        <label>
+            <input type="radio" class="fontsize" name="px" value="20px">20px
+        </label>
+        <label>
+            <input type="radio" class="fontsize" name="px" value="30px">30px
+        </label>
+        <label>
+            <input type="radio" class="fontsize" name="px" value="40px">40px
+        </label>
+    </div>
+    <div>
+        글자색 : <input type="color" class="ftcolor" value="#cfcfcf"> 배경색 : <input type="color" class="bgcolor" value="#cfcfcf">
+    </div>
+    <div>글꼴선택 :
+        <label>
+            <input type="radio" class="font" name="font" value="Jua">Jua
+        </label>
+        <label>
+            <input type="radio" class="font" name="font" value="Nanum Pen Script">Nanum
+        </label>
+        <label>
+            <input type="radio" class="font" name="font" value="Single Day">Single
+        </label>
+        <label>
+            <input type="radio" class="font" name="font" value="Gamja Flower">Gamja
+        </label>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div id="box">안녕하세요</div>
+
+    <script>
+        //테두리 체크박스
+        document.querySelector("#boxstyle").onclick = function () {
+            if (this.checked) {
+                document.querySelector("#box").style.border = "10px groove yellow";
+            } else {
+                document.querySelector("#box").style.border = "NONE";
+            }
+        }
+        //입력값
+        document.querySelector("#text").onkeyup = function () {
+            document.querySelector("#box").innerHTML = this.value;
+        }
+        //글자크기
+        let font = document.querySelectorAll(".fontsize");
+        for (let i = 0; i < font.length; i++) {
+            font[i].onclick = function () {
+                document.querySelector("#box").style.fontSize = font[i].value;
+            }
+        }
+        //글꼴선택
+        let family = document.querySelectorAll(".font");
+        for(let i = 0; i<family.length; i++){
+            family[i].onclick = function () {
+                document.querySelector("#box").style.fontFamily = family[i].value;
+            }
+        }
+        //글자색
+        document.querySelector(".ftcolor").onchange = function(){
+            document.querySelector("#box").style.color = this.value;
+        }
+        //배경색
+        document.querySelector(".bgcolor").onchange = function(){
+            document.querySelector("#box").style.backgroundColor = this.value;
+        }
+
+
+    </script>
+</body>
+
+</html>

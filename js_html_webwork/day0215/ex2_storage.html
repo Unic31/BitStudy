@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #view{
+            position: absolute;
+            left: 200px;
+            top: 50px;
+            font-size: 20px;
+
+        }
+    </style>
+</head>
+<body>
+    <!--
+        Web Storage:클라이언트의 브라우저에 소량의 데이터를 저장해두기 위한 기억공간(자바의 쿠키와 비슷)
+        localStorage : 반영구적 보관 크기는 약 5mb
+        sessionStorage : 세션이 유효한 만큼만 보관, 창 닫으면 사라짐
+    -->
+    <h2>localStorage & seccionStorage</h2>
+
+    <button type="button" id="btnadd">저장</button>
+    <br>
+    <button type="button" id="btndel">삭제</button>
+    <br>
+    <button type="button" id="btnalldel">전체삭제</button>
+    <br>
+    <button type="button" id="btnview">내용보기</button>
+    <br>
+    <div id="view">결과...</div>
+
+    <script>
+        document.getElementById("btnadd").onclick=function(){
+            //localStorage에 값을 저장하는 방법이 3가지가 있다
+            //localStorage는 내가 지우지 않으면 영구적으로 남아있다
+            localStorage.setItem("loginid","master");
+
+            localStorage.Key="Value"
+            localStorage.address="서울시 강남구"
+
+            localStorage["hp"]="010-1111-2222";
+
+            sessionStorage.className="Java701";//브라우저를 닫으면 제거된다
+        }
+        
+        document.getElementById("btndel").onclick=function(){
+            //address를 지워보자
+            localStorage.removeItem("address");
+            localStorage.removeItem("Key");
+        }
+        document.getElementById("btnalldel").onclick=function(){
+            //전레 로컬스트리지 삭제
+            localStorage.clear();
+        }
+        document.getElementById("btnview").onclick=function(){
+            //얻는 방법도 세가지방법이 있다
+            let loginid=localStorage.getItem("loginid");
+            let address=localStorage.address;
+            let hp=localStorage["hp"];
+            let 담을값=localStorage.Key;
+
+            document.getElementById("view").innerText=
+            `login : ${loginid} 
+            address : ${address}
+            hp : ${hp}
+            Key : ${담을값}`//null 이랑 undefined가 나오지만 둘 다 null로 받아진다. (함수쓸때null써도 될듯)*
+        }
+
+    </script>
+    
+</body>
+</html>

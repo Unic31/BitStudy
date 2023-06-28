@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--BS5-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!--jquery-->
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+    <!--쌤폰트-->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Single+Day&display=swap"
+        rel="stylesheet">
+    <!--아이콘-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        div.offcanvas-body p{
+            cursor: pointer;
+        }
+        div.offcanvas-body p:hover{
+            background-color: aquamarine;
+            color: brown;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <!--start, end, top, bottom:메뉴 사이드바가 나오는 위치 지정-->
+    <div class="offcanvas offcanvas-top" id="side_demo">
+        <div class="offcanvas-header">
+            <h1 class="offcanvas-title">스타벅스 메뉴 선택</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <p src="../image/food/1.jpg" data-bs-toggle="offcanvas" price="18000">햄에그 샌드위치</p>
+            <p src="../image/food/11.jpg" data-bs-toggle="offcanvas" price="12000">망고빙수</p>
+            <p src="../image/food/8.jpg" data-bs-toggle="offcanvas" price="9000">샌드위치</p>
+            <p src="../image/food/6.jpg" data-bs-toggle="offcanvas" price="11000">오므라이스</p>
+        </div>
+    </div>
+
+    <div class="container-fluid mt-3">
+        <h3>오늘부터 3일간 이벤트</h3>
+        <p>모든 제품20% 세일합니다. 단 사이렌 오더 안됩니다...</p>
+        <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#side_demo">
+            스타벅스 메뉴 고르기
+        </button>
+        <br><br>
+        <h2 class="title">제품 제목 나오게 하기</h2>
+        <figure style="width: 250px;" class="select-menu">
+            <img src="../image/food/11.jpg" width="250" border="2">
+            <figcaption style="text-align: center;">
+                <h1>1900원</h1>
+            </figcaption>
+        </figure>
+    </div>
+
+    <script>
+        $("div.offcanvas-body p").click(function(){
+
+            //제품제목
+            $("h2.title").text($(this).text());
+            //제품 사진
+            $("figure.select-menu img").attr("src",$(this).attr("src"));
+            //제품 ㅏ격
+            let pr=$(this).attr("price")
+            $("figure.select-menu h1").html
+            (`<strike style="color:red">
+            ${(pr)/0.8}원</strike>
+            ${pr}원
+
+            `)
+            //원래가격 (20프로 증가된 가격):빨강색,취소선 - 그 옆에 현재 가격(20프로 dc가격)
+
+            // let src = $(this).attr("src")
+            // let text = $(this).attr("price")
+            // $(".select-menu>img").attr("src",src);
+            // $(".select-menu figcaption h1").text(text);
+        })
+
+    </script>
+</body>
+
+</html>

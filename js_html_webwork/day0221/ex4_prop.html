@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--부트스트랩 5-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!--jquery-->
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+    <!--쌤폰트-->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Single+Day&display=swap"
+        rel="stylesheet">
+
+    <title>Document</title>
+</head>
+
+<body>
+    <h4 class="alert alert-danger">prop는 true/false 값 변경 시 사용</h4>
+    <label>
+        <input type="checkbox" id="chkall" class="form-check-input">전체선택
+    </label>
+    <hr>
+    <label>
+        <input type="checkbox" name="board" class="form-check-input">제목 1
+    </label>
+    <br>
+    <label>
+        <input type="checkbox" name="board" class="form-check-input">제목 2
+    </label>
+    <br>
+    <label>
+        <input type="checkbox" name="board" class="form-check-input">제목 3
+    </label>
+    <br>
+    <label>
+        <input type="checkbox" name="board" class="form-check-input">제목 4
+    </label>
+    <br>
+
+    <script>
+        $("#chkall").click(function(){
+            //전체선택 체크박스의 체크 상태를 얻어낸다
+            // let allchk = $(this).is(":checked");
+            let allchk = $(this).prop("checked");            //전체선택 버튼이 checked의 상태(true,false)를 아래 버튼에 넣음
+            // alert(allchk);                                //
+            $("input[name='board']").prop("checked",allchk) // 아래 선택창에 영향을 줌
+        });
+    </script>
+</body>
+
+</html>

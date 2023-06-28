@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div.timer{
+            margin: 30px 30px;
+            font-size: 40px;
+        }
+    </style>
+    <script>
+        window.onload=function(){//윈도우 키면 호출
+            //초기 시간 출력
+            write_timer();
+
+            //1초마다 시간 다시 출력
+            setInterval(write_timer,1000);
+        }
+
+        //사용자함수, 호출한 시점에서 사용
+        function write_timer(){
+            let today=new Date();/////////////////////////이거왜?
+            let year=today.getFullYear();//현재 년도 4자리를 숫자로 반환
+            let month=today.getMonth()+1;//0~11을 반환, +1을 해줌으로써 1~12
+            let day=today.getDate();//현재날짜
+
+            let hour=today.getHours();
+            let min=today.getMinutes();
+            let sec=today.getSeconds();
+
+            document.querySelector(".timer").innerHTML=
+            `오늘은 ${year}년 ${month}월 ${day}일 입니다<br>
+            ${hour}:${min<10?"0"+min:min}:${sec<10?0+String(sec):sec}`;//(String(sec)가 아니라 그냥sec하면 같은 숫자로
+                    //초,분이 한자리수일때                               //인식해서 0+시간=그냥시간 이 되어버림
+                    //앞에 0을 넣음                                         
+        }
+    </script>
+</head>
+<body>
+    <div class="timer">00:00:00</div>
+</body>
+</html>

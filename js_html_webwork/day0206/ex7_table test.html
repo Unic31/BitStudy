@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .test_table {
+            border: 1px solid rgb(0, 0, 0);
+            border-collapse: separate;
+        }
+        
+        .test_table>tbody>tr>td {
+            
+            border: 1px solid rgb(0, 0, 0);
+            width: 100px;
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <table class="test_table">
+        <caption>연습</caption>
+        <tbody>
+            <tr>
+                <td rowspan="3" bgcolor="skyblue" valign="top">일</td>
+                <td colspan="3" bgcolor="pink">이</td>
+            </tr>
+            <tr>
+                <td colspan="2" bgcolor="pink">삼</td>
+                <td rowspan="3" bgcolor="skyblue" valign="bottom">사</td>
+            </tr>
+            <tr>
+                <td>오</td>
+                <td>육</td>
+            </tr>
+            <tr>
+                <td colspan="3" bgcolor="pink">칠</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>
